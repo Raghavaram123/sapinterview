@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete SAP Security & GRC Mastery</title>
+    <style>
+        :root {
+            --sap-blue: #0a6ed1;
+            --sap-bg: #f2f2f2;
+            --sap-text: #333333;
+            --sap-white: #ffffff;
+            --sap-header: #354a5f;
+            --success: #28a745;
+            --danger: #dc3545;
+        }
+        body {
+            font-family: '72', 'Arial', sans-serif;
+            background-color: var(--sap-bg);
+            color: var(--sap-text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background-color: var(--sap-header);
+            color: var(--sap-white);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            background-color: var(--sap-white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav button {
+            background: none;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: bold;
+            color: var(--sap-text);
+            transition: all 0.2s;
+        }
+        nav button:hover, nav button.active {
+            border-bottom: 3px solid var(--sap-blue);
+            color: var(--sap-blue);
+            background-color: #e5f0fa;
+        }
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: var(--sap-white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .hidden { display: none; }
+        h2 { border-bottom: 2px solid var(--sap-bg); padding-bottom: 0.5rem; color: var(--sap-header); }
+        .lesson-card {
+            border: 1px solid #ddd;
+            border-left: 4px solid var(--sap-blue);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+        .lesson-card h3 { margin-top: 0; color: var(--sap-blue); }
+        .tag {
+            display: inline-block;
+            background: var(--sap-header);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        .audit-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Quiz Styles */
+        .quiz-question { margin-bottom: 2rem; }
+        .quiz-options button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #ccc;
+            background: var(--sap-white);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .quiz-options button:hover:not(:disabled) { background: #e5f0fa; }
+        .correct { background: #d4edda !important; border-color: var(--success) !important; font-weight: bold; }
+        .wrong { background: #f8d7da !important; border-color: var(--danger) !important; color: #721c24; }
+        .feedback { 
+            padding: 1rem; 
+            margin-top: 0.5rem; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .feedback.success { background-color: #d4edda; color: var(--success); border: 1px solid var(--success); }
+        .feedback.error { background-color: #f8d7da; color: var(--danger); border: 1px solid var(--danger); }
+        
+        /* Progress Bar */
+        #score-container {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--sap-header);
+            color: white;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>SAP Security & GRC Masterclass</h1>
+        <p>Complete 30-Day Curriculum & Interview Simulator</p>
+    </header>
+
+    <nav>
+        <button id="btn-plan" class="active" onclick="showTab('plan')">30-Day Plan</button>
+        <button id="btn-tcodes" onclick="showTab('tcodes')">Core T-Codes</button>
+        <button id="btn-grc" onclick="showTab('grc')">GRC Operations</button>
+        <button id="btn-quiz" onclick="showTab('quiz')">Interview Simulator (12 Scenarios)</button>
+    </nav>
+
+    <main id="content-plan">
+        <h2>The 30-Day Practice Plan</h2>
+        <p>Follow this schedule in your sandbox environment to build muscle memory.</p>
+        
+        <div class="lesson-card">
+            <span class="tag">Week 1</span>
+            <h3>Foundations (Days 1-7)</h3>
+            <ul>
+                <li><strong>Day 1:</strong> SU01, SU01D - Create a dialog user, view user details (simulate approvals).</li>
+                <li><strong>Day 2:</strong> SU10, PFUD - Perform a mass lock and run PFUD on a sample user.</li>
+                <li><strong>Day 3:</strong> PFCG - Create a simple role with 1-2 transactions; generate profile.</li>
+                <li><strong>Day 4:</strong> SUIM - Run reports (users by role, users with SAP_ALL).</li>
+                <li><strong>Day 5:</strong> SU53, SU56 - Reproduce an auth failure and analyze buffer.</li>
+                <li><strong>Day 6:</strong> SE16/SE16N - Query AGR_USERS, AGR_1251, USR02 and interpret results.</li>
+                <li><strong>Day 7:</strong> Revision & mock ticket handling.</li>
+            </ul>
+        </div>
+
+        <div class="lesson-card">
+            <span class="tag">Week 2</span>
+            <h3>Role Design & Troubleshooting (Days 8-14)</h3>
+            <ul>
+                <li><strong>Day 8:</strong> PFCG advanced - Org-level fields, derived roles.</li>
+                <li><strong>Day 9:</strong> SU24 & SU22 - Check authorization proposals for T-codes and program checks.</li>
+                <li><strong>Day 10:</strong> PFUD/SU09 - Profile comparisons, transport-related checks.</li>
+                <li><strong>Day 11:</strong> Mock Ticket - User missing org level, identify and fix.</li>
+                <li><strong>Day 12:</strong> RZ11/RZ10 - Check runtime params and understand restart impact.</li>
+                <li><strong>Day 13:</strong> SU21/SU20 - Authorization objects and classes.</li>
+                <li><strong>Day 14:</strong> Mock interview on role design & SoD.</li>
+            </ul>
+        </div>
+
+        <div class="lesson-card">
+            <span class="tag">Week 3 & 4</span>
+            <h3>GRC Fundamentals & Advanced (Days 15-30)</h3>
+            <ul>
+                <li><strong>Day 15-17:</strong> NWBC navigation, ARA risk analysis simulation, ARM access workflows.</li>
+                <li><strong>Day 18-20:</strong> EAM Firefighter flows, sync jobs, mapping reports to audit asks.</li>
+                <li><strong>Day 22-24:</strong> Mitigation control creation, role remediation, emergency access review.</li>
+                <li><strong>Day 25-27:</strong> Cross-system sync, transports of rulesets, RCA for production incidents.</li>
+            </ul>
+        </div>
+    </main>
+
+    <main id="content-tcodes" class="hidden">
+        <h2>Core Security T-Codes & Playbooks</h2>
+        
+        <div class="lesson-card">
+            <h3>User Management: SU01, SU10, SU01D</h3>
+            <p><strong>SU01:</strong> Create/change/lock/unlock user. <em>Real Example: New AP clerk needs Z_FI_AP_CLERK role.</em></p>
+            <p><strong>SU10:</strong> Mass maintenance. <em>Example: Lock 150 contractors after expiry. (Always test first).</em></p>
+            <p><strong>SU01D:</strong> Display user read-only. Perfect for providing audit evidence of role validity.</p>
+        </div>
+
+        <div class="lesson-card">
+            <h3>Troubleshooting: SU53, SU56, PFUD</h3>
+            <p><strong>SU53:</strong> Displays the last failed authorization check. <strong>Critical:</strong> Must be run immediately after the error.</p>
+            <p><strong>SU56:</strong> Shows authorizations loaded into the user buffer (in-memory). Use if role is assigned but user still lacks access.</p>
+            <p><strong>PFUD:</strong> User Master Comparison. Recreates profiles/syncs user master after role changes or transports.</p>
+            <div class="audit-box">
+                <strong>Playbook for Mass Issue after Transport:</strong> Check transport log, apply PFUD, run profile generator in PFCG, check AGR_1251 entries comparing DEV vs PRD.
+            </div>
+        </div>
+
+        <div class="lesson-card">
+            <h3>Role & Config Maintenance: PFCG, SU24, RZ10/11</h3>
+            <p><strong>PFCG:</strong> Core role maintenance. Manage menu, authorizations (S_TCODE, org restrictions), and generate profiles.</p>
+            <p><strong>SU24:</strong> Controls proposed authorizations for a T-code. If a custom T-code (Z_INVOICE) needs new auth objects, update SU24 so PFCG pulls them automatically.</p>
+            <p><strong>RZ10/RZ11:</strong> Profile and runtime params. RZ11 is dynamic (runtime), RZ10 is persistent and requires a restart (e.g., enforcing password complexity).</p>
+        </div>
+    </main>
+
+    <main id="content-grc" class="hidden">
+        <h2>SAP GRC Access Control Mastery</h2>
+        <p>GRC Access Control is typically used via the NWBC web UI, supported by backend GRAC* transactions.</p>
+        
+        <div class="lesson-card">
+            <h3>Access Risk Analysis (ARA) & Mitigation</h3>
+            <p><strong>Concept:</strong> Detects SoD violations. If a user has "Create Vendor + Pay Vendor", ARA flags it.</p>
+            <p><strong>Remediation Steps:</strong></p>
+            <ol>
+                <li>Check for business justification. If none, remove offending role via PFCG.</li>
+                <li>If justified and cannot be split, create a <strong>Mitigation Control</strong> in GRC.</li>
+                <li>Assign an owner and periodic review frequency to the control.</li>
+                <li>Re-run ARA and capture the report as evidence.</li>
+            </ol>
+        </div>
+
+        <div class="lesson-card">
+            <h3>Access Request Management (ARM)</h3>
+            <p><strong>Workflow:</strong> Login to NWBC -> Open ARM -> Fill requester, role, reason -> Submit -> Check MSMP approval path.</p>
+            <div class="audit-box">
+                <strong>Troubleshooting Provisioning Failures:</strong> Check ARM request -> provisioning log -> RFC connectivity -> connector user privileges -> re-process or manually provision temporarily.
+            </div>
+        </div>
+
+        <div class="lesson-card">
+            <h3>Emergency Access Management (EAM / Firefighter)</h3>
+            <p><strong>T-Code:</strong> <code>GRAC_EAM</code></p>
+            <p><strong>Workflow:</strong> Provides centralized emergency IDs. A Controller must review the session, download the event log, highlight risky T-codes executed, and sign off or escalate to security.</p>
+        </div>
+    </main>
+
+    <main id="content-quiz" class="hidden">
+        <h2>Interview Scenario Simulator</h2>
+        <p>These 12 questions are based on real-world tickets and audit findings. Select the best course of action.</p>
+        <div id="score-container" class="hidden">Score: <span id="score">0</span> / 12</div>
+        <div id="quiz-container"></div>
+    </main>
+
+    <script>
+        // Tab Navigation
+        function showTab(tabName) {
+            document.querySelectorAll('main').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+            document.getElementById('btn-' + tabName).classList.add('active');
+        }
+
+        // Full Quiz Data mapped to exactly the tickets in the PDF
+        const quizData = [
+            {
+                question: "Ticket: HR states a new contractor's contract has expired along with 150 others. What is the most efficient way to lock all 150 users?",
+                options: [
+                    "Use SU01 and lock them one by one.",
+                    "Run transaction SU10, select the users by user group, and execute a mass lock.",
+                    "Use PFCG to remove their roles.",
+                    "Run PFUD to clear their profiles."
+                ],
+                answer: 1,
+                explanation: "SU10 is used for Mass User Maintenance, allowing you to lock all users in a specific group simultaneously."
+            },
+            {
+                question: "Ticket: An external auditor requests a report showing all users assigned the 'SAP_ALL' profile. Which transaction should you use to pull this report?",
+                options: [
+                    "SU53",
+                    "SE16N looking at table USR02",
+                    "SUIM (User Information System)",
+                    "SU24"
+                ],
+                answer: 2,
+                explanation: "SUIM is the User Information System, specifically used for security reporting like finding users by role or profile."
+            },
+            {
+                question: "Ticket: User r.kumar gets a 'Not authorized' error while posting an invoice via FB60. As a Security Admin, what is your first instruction to the user?",
+                options: [
+                    "Ask them to log off and log back in.",
+                    "Ask them to reproduce the error and immediately run transaction SU53.",
+                    "Run a system trace using ST01 immediately.",
+                    "Add SAP_ALL to their account temporarily so they can finish their work."
+                ],
+                answer: 1,
+                explanation: "SU53 displays the last failed authorization check, but it is time-sensitive and must be run right after the failure."
+            },
+            {
+                question: "Ticket: You just assigned role Z_FI_AP_CLERK to a user via SU01, but they complain they still cannot access the T-codes. What transaction helps you check if the authorizations are loaded into their in-memory buffer?",
+                options: [
+                    "SU56",
+                    "SU01D",
+                    "PFCG",
+                    "RZ11"
+                ],
+                answer: 0,
+                explanation: "SU56 shows the authorization buffer. If it's not updated, you ask the user to log off/on or run a buffer refresh."
+            },
+            {
+                question: "Ticket: Roles were just transported from DEV to PRD. However, multiple users are missing authorizations because their profiles were not generated post-transport. What transaction do you run?",
+                options: [
+                    "SU10",
+                    "SU25",
+                    "PFUD",
+                    "GRAC_EAM"
+                ],
+                answer: 2,
+                explanation: "PFUD (User Master Comparison) recreates profiles and syncs the user master after role changes or transports."
+            },
+            {
+                question: "Ticket: You need to extract exactly what date the role Z_FI_AP_CLERK was assigned to user r.venkat for an audit. Which table and transaction do you use?",
+                options: [
+                    "Transaction SUIM, Table USR02",
+                    "Transaction SE16/SE16N, Table AGR_USERS",
+                    "Transaction PFCG, Table AGR_1251",
+                    "Transaction SU01, Table USR03"
+                ],
+                answer: 1,
+                explanation: "SE16 or SE16N allows you to query table AGR_USERS, filtering by UNAME and AGR_NAME to see the assignment date."
+            },
+            {
+                question: "Ticket: The IT Director wants to permanently increase the minimum password length (`login/min_password_lng`) across the SAP instance. Which transaction do you use?",
+                options: [
+                    "RZ11",
+                    "RZ10",
+                    "SU10",
+                    "SU21"
+                ],
+                answer: 1,
+                explanation: "While RZ11 changes dynamic runtime parameters, RZ10 is used to edit the instance profile for persistent, permanent changes (which usually requires a restart)."
+            },
+            {
+                question: "Ticket: Developers created a custom T-code (Z_INVOICE). When you add it to a role in PFCG, no authorization objects are pulled in. How do you fix this so PFCG proposes the correct objects?",
+                options: [
+                    "Manually type the objects into PFCG every time.",
+                    "Update the authorization proposals for the T-code in transaction SU24.",
+                    "Run SU25 to upgrade the system.",
+                    "Create a new object class in SU21."
+                ],
+                answer: 1,
+                explanation: "SU24 controls proposed authorizations for a T-code. Updating SU24 ensures PFCG automatically pulls in the correct objects."
+            },
+            {
+                question: "Ticket (GRC): User a.patel is flagged in an ARA report with a high-severity SoD conflict: Create Vendor + Pay Vendor. The Finance Director refuses to remove the access due to team size constraints. What is the correct action?",
+                options: [
+                    "Close the ticket since the Director approved it.",
+                    "Remove the access anyway to stay compliant.",
+                    "Create a documented Mitigation Control in GRC with an owner and periodic review frequency.",
+                    "Give the user Firefighter access permanently."
+                ],
+                answer: 2,
+                explanation: "If a business justification exists and the role cannot be split, you must apply a mitigation control in GRC and re-run ARA."
+            },
+            {
+                question: "Ticket (GRC): An access request in ARM (ID 12345) has failed with status 'Provisioning Error'. What are your troubleshooting steps?",
+                options: [
+                    "Check the workflow log for the failure step, then check the connector/RFC config and user privileges in the target system.",
+                    "Check the MSMP workflow rules in BRFplus.",
+                    "Run a user sync job immediately.",
+                    "Ask the user to submit a new ticket."
+                ],
+                answer: 0,
+                explanation: "Provisioning errors in ARM usually stem from RFC connectivity issues or lack of privileges for the RFC user in the back-end system."
+            },
+            {
+                question: "Ticket (GRC): You are a Firefighter Controller. A user utilized the FF_FIN_ADMIN ID yesterday. What is your responsibility?",
+                options: [
+                    "Reset the Firefighter ID password.",
+                    "Open GRAC_EAM, download the event log, review risky T-codes executed, and sign off or escalate.",
+                    "Transport the Firefighter role to Production.",
+                    "Run an Access Risk Analysis on the Firefighter ID."
+                ],
+                answer: 1,
+                explanation: "Controllers must review the Firefighter session logs, identify what the user did with the emergency access, and document their approval/escalation."
+            },
+            {
+                question: "Audit Checklist: Which of the following is NOT typically requested by an auditor as evidence?",
+                options: [
+                    "SUIM exports showing user role mappings.",
+                    "Firefighter session logs and controller sign-offs.",
+                    "The ABAP source code of custom Z-programs.",
+                    "ARA / SoD reports from GRC (pre & post remediation)."
+                ],
+                answer: 2,
+                explanation: "Auditors in a Security/GRC context look for user mapping, change request approvals, ARA reports, and FF logs. They generally do not review raw ABAP source code."
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const scoreContainer = document.getElementById('score-container');
+        const scoreDisplay = document.getElementById('score');
+        let currentScore = 0;
+        let questionsAnswered = 0;
+
+        quizData.forEach((q, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'quiz-question lesson-card';
+            
+            const qTitle = document.createElement('h3');
+            qTitle.innerText = `Scenario ${index + 1}:`;
+            
+            const qText = document.createElement('p');
+            qText.innerText = q.question;
+            qText.style.fontWeight = 'bold';
+
+            questionDiv.appendChild(qTitle);
+            questionDiv.appendChild(qText);
+
+            const optionsDiv = document.createElement('div');
+            optionsDiv.className = 'quiz-options';
+
+            const feedbackDiv = document.createElement('div');
+            feedbackDiv.className = 'feedback hidden';
+
+            q.options.forEach((opt, optIndex) => {
+                const btn = document.createElement('button');
+                btn.innerText = opt;
+                btn.onclick = () => {
+                    // Disable all buttons
+                    Array.from(optionsDiv.children).forEach(b => b.disabled = true);
+                    
+                    scoreContainer.classList.remove('hidden');
+                    questionsAnswered++;
+
+                    if (optIndex === q.answer) {
+                        btn.classList.add('correct');
+                        feedbackDiv.innerHTML = "✅ <strong>Correct!</strong> " + q.explanation;
+                        feedbackDiv.classList.add('success');
+                        currentScore++;
+                    } else {
+                        btn.classList.add('wrong');
+                        optionsDiv.children[q.answer].classList.add('correct');
+                        feedbackDiv.innerHTML = "❌ <strong>Incorrect.</strong> " + q.explanation;
+                        feedbackDiv.classList.add('error');
+                    }
+                    
+                    scoreDisplay.innerText = currentScore;
+                    feedbackDiv.classList.remove('hidden');
+                };
+                optionsDiv.appendChild(btn);
+            });
+
+            questionDiv.appendChild(optionsDiv);
+            questionDiv.appendChild(feedbackDiv);
+            quizContainer.appendChild(questionDiv);
+        });
+    </script>
+</body>
+</html>
